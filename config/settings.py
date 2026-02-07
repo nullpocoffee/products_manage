@@ -75,10 +75,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# config/settings.py
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/db.sqlite3',  # BASE_DIR / 'db.sqlite3' から変更
+        'NAME': '/tmp/db.sqlite3',  # ここを /tmp/ にするのがポイントです！
     }
 }
 
