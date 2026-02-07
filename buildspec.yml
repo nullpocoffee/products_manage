@@ -1,23 +1,18 @@
 version: 0.2
 
-env:
-  variables:
-    AWS_DEFAULT_REGION: ap-northeast-1
-    AWS_ACCOUNT_ID: 740481920667
-
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 740481920667.dkr.ecr.ap-northeast-1.amazonaws.com
 
   build:
     commands:
       - echo Building the Docker image...
       - docker build -t products-manage .
-      - docker tag products-manage:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/products-manage:latest
+      - docker tag products-manage:latest 740481920667.dkr.ecr.ap-northeast-1.amazonaws.com/products-manage:latest
 
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/products-manage:latest
+      - docker push 740481920667.dkr.ecr.ap-northeast-1.amazonaws.com/products-manage:latest
