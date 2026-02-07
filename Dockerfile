@@ -18,6 +18,5 @@ COPY . /app/
 # App Runnerが使用するポート8000を開放
 EXPOSE 8000
 
-# 本番用サーバーgunicornで起動
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
-
+# ★ ここが重要：起動時に migrate を実行してから gunicorn を起動
+CMD ["sh", "-c", "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"]
